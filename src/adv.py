@@ -55,13 +55,12 @@ def handle_player_action(movement):
         print("Thanks for playing.")
         exit()
     direction = move_rooms(movement)
-    while True:
-        try:
-            newRoom = getattr(thomas.room, direction)
-            return newRoom
-        except AttributeError:
-            print("No room in that direction. Please try again.")
-            main()
+    try:
+        newRoom = getattr(thomas.room, direction)
+        return newRoom
+    except AttributeError:
+        print("No room in that direction. Please try again.")
+        main()
 
 
 def main():
