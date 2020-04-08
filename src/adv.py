@@ -1,5 +1,5 @@
 from room import Room
-
+from player import Player
 # Declare all the rooms
 
 room = {
@@ -33,9 +33,49 @@ room['narrow'].w_to = room['foyer']
 room['narrow'].n_to = room['treasure']
 room['treasure'].s_to = room['narrow']
 
+thomas = Player("Thomas", room['outside'])
+
 #
 # Main
 #
+
+
+def move_rooms(direction):
+    switcher = {
+        "w": "n_to",
+        "s": "s_to",
+        "d": "e_to",
+        "a": "w_to"
+    }
+    return switcher.get(direction, "Invalid Input")
+
+
+def handle_player_action(movement):
+    if movement == 'q':
+        print("Thanks for playing.")
+        exit()
+    direction = move_rooms(movement)
+    while True:
+        try:
+            newRoom = getattr(thomas.room, direction)
+            return newRoom
+        except AttributeError:
+            print("No room in that direction. Please try again.")
+            main()
+
+
+def main():
+    while True:
+        print(f"{thomas.name} is in room: {thomas.room.name}")
+        movement = input("Enter a WASD key to move to a new room: ")
+        newRoom = handle_player_action(movement)
+        try:
+            thomas.room = newRoom
+        except Exception as e:
+            print(e)
+
+
+main()
 
 # Make a new player object that is currently in the 'outside' room.
 
