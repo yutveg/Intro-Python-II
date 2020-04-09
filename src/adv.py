@@ -124,13 +124,11 @@ def main():
     while True:
         print(f"{thomas.name} is in room: {thomas.room.name}")
         if(thomas.room.contents is not None):
-            if(len(thomas.room.contents) == 1):
-                print(f"The room contains: ")
-                print(thomas.room.contents[0].name)
-            if(len(thomas.room.contents) > 1):
+            if(len(thomas.room.contents) >= 1):
                 print(f"The room contains: ")
                 for item in thomas.room.contents:
                     print(item.name)
+
         command = input("Move with WASD or enter command: ")
         handle_player_action(command)
 
