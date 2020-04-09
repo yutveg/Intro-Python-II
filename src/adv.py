@@ -77,6 +77,7 @@ def handle_item_interaction(action):
     if(action[0] == 'take'):
         thomas.room.contents.remove(item[action[1]])
         thomas.inventory.append(item[action[1]])
+        item[action[1]].on_take()
         print(f"{item[action[1]].name} has been added to your inventory.")
     if(action[0] == 'drop'):
         thomas.inventory.remove(item[action[1]])
@@ -90,15 +91,14 @@ def open_inventory():
     if(len(thomas.inventory) == 0):
         print("*crickets*")
     else:
-        for i in thomas.inventory:
-            print(i.name)
+        for item in thomas.inventory:
+            print(f"{item.name}: {item.description}")
 
     print("******************************")
     input("Press enter to close inventory: ")
 
 
 def handle_player_action(action):
-    print(action)
     command_type = action.split(' ')
     if(len(command_type) == 2):  # user inputted a command
         handle_item_interaction(command_type)
@@ -129,8 +129,8 @@ def main():
                 print(thomas.room.contents[0].name)
             if(len(thomas.room.contents) > 1):
                 print(f"The room contains: ")
-                for i in thomas.room.contents:
-                    print(thomas.room.contents[i].name)
+                for item in thomas.room.contents:
+                    print(item.name)
         command = input("Move with WASD or enter command: ")
         handle_player_action(command)
 

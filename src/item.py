@@ -5,8 +5,7 @@ class Item:
         self.effect = effect
 
     def on_take(self):
-        print(f"You have picked up {self.name.upper()}")
         if(self.effect is None):
             pass
         else:
-            print(f"{self.effect}")
+            print(f"***{self.effect}***")
