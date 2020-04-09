@@ -3,6 +3,7 @@
 
 
 class Player:
-    def __init__(self, name, room):
+    def __init__(self, name, room, inventory=None):
         self.name = name
         self.room = room
+        self.inventory = [] if inventory is None else inventory
