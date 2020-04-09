@@ -59,8 +59,8 @@ def handle_player_action(movement):
         newRoom = getattr(thomas.room, direction)
         return newRoom
     except AttributeError:
-        print("No room in that direction. Please try again.")
-        main()
+        print("*******************\nNo room in that direction. Please try again.\n*******************")
+        return None
 
 
 def main():
@@ -68,10 +68,13 @@ def main():
         print(f"{thomas.name} is in room: {thomas.room.name}")
         movement = input("Enter a WASD key to move to a new room: ")
         newRoom = handle_player_action(movement)
-        try:
-            thomas.room = newRoom
-        except Exception as e:
-            print(e)
+        if(newRoom is None):
+            pass
+        else:
+            try:
+                thomas.room = newRoom
+            except Exception as e:
+                print(e)
 
 
 main()
